@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Painel administrativo — Larissa Doces</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/admin.css" />
+<link rel="icon" href="../assets/media/favicon.ico" />
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="badge"><svg viewBox="0 0 24 24" fill="none" width="28" height="28"><path d="M4 21V13.5c0-.8.5-1.4 1.2-1.7l6-2.4a2 2 0 0 1 1.6 0l6 2.4c.7.3 1.2.9 1.2 1.7V21" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 17.2c1.6.9 3.4 1.4 5 .2 1.7-1.3 3.3-1.3 5 0 1.6 1.2 3.4.7 5-.2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 9.4V5M9.3 6.4 12 3.8l2.7 2.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h1>Olá, Larissa</h1>
+    <p>Entre para gerenciar seu site.</p>
+    <div class="login-error" id="loginError">Usuário ou senha incorretos. Tente novamente.</div>
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginUser">Usuário</label>
+        <input type="text" id="loginUser" autocomplete="username" required />
+      </div>
+      <div class="field">
+        <label for="loginPass">Senha</label>
+        <input type="password" id="loginPass" autocomplete="current-password" required />
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+    </form>
+    <div class="login-hint">
+      <strong>Acesso de demonstração:</strong><br />
+      Usuário: <code>larissa</code> · Senha: <code>doces2026</code><br />
+      Você pode trocar isso em <em>Meu Perfil → Acesso</em> depois de entrar.
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app-shell" id="appShell">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="dot">L</span> Painel da Larissa</div>
+    <button class="side-link is-active" data-view="dashboard"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Início</button>
+    <button class="side-link" data-view="agenda"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M8 3v4M16 3v4M3 10h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Minha agenda</button>
+    <button class="side-link" data-view="sabores"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 5 20h14L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.2 14.5h7.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Meus sabores</button>
+    <button class="side-link" data-view="depoimentos"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H9l-4 4V5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Feedback dos clientes</button>
+    <button class="side-link" data-view="publicacoes"><svg viewBox="0 0 24 24" fill="none"><path d="M4 11v2a2 2 0 0 0 2 2h1l2 5 2-1-1.6-4H12l7 3V6l-7 3H6a2 2 0 0 0-2 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg> Minhas publicações</button>
+    <button class="side-link" data-view="perfil"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M5 20c1.2-3.8 4-5.6 7-5.6s5.8 1.8 7 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Meu perfil</button>
+    <div class="sidebar-footer">
+      <a href="../index.html" target="_blank" class="side-link"><svg viewBox="0 0 24 24" fill="none"><path d="M10 14 20 4M20 4h-5M20 4v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Ver meu site</a>
+      <button class="side-link" id="btnLogout"><svg viewBox="0 0 24 24" fill="none"><path d="M15 17.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M9 12h11m0 0-3-3m3 3-3 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Sair</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <span class="topbar-title" id="topbarTitle">Início</span>
+      </div>
+      <span style="font-size:.85rem;color:var(--cocoa-soft);display:inline-flex;align-items:center;gap:6px;">Olá, Larissa <svg viewBox="0 0 24 24" width="15" height="15" fill="#c6748c"><path d="M12 21s-7.6-4.8-10-9.3C.5 8.6 2 5 5.6 5c2 0 3.4 1 4.4 2.6C11 6 12.4 5 14.4 5 18 5 19.5 8.6 22 11.7 19.6 16.2 12 21 12 21Z"/></svg></span>
+    </div>
+
+    <!-- DASHBOARD -->
+    <section class="view is-active" id="view-dashboard">
+      <div class="help-banner">Este é o painel de demonstração (versão teste). Tudo o que você altera aqui fica salvo neste navegador. Para um painel com login seguro e salvamento em nuvem, use a versão topzera.</div>
+      <div class="cards-grid" id="dashboardCards"></div>
+      <h2 style="margin-bottom:16px;">Atalhos rápidos</h2>
+      <div class="quick-actions">
+        <button class="btn btn-primary" data-action="novo-evento">+ Novo evento</button>
+        <button class="btn btn-primary" data-action="novo-sabor">+ Novo sabor</button>
+        <button class="btn btn-primary" data-action="novo-depoimento">+ Novo depoimento</button>
+        <button class="btn btn-primary" data-action="nova-publicacao">+ Nova publicação</button>
+      </div>
+    </section>
+
+    <!-- AGENDA -->
+    <section class="view" id="view-agenda">
+      <div class="section-toolbar">
+        <h2>Minha agenda</h2>
+        <button class="btn btn-primary" id="btnAddEvento">+ Adicionar evento</button>
+      </div>
+      <p>Eventos com a data já passada somem sozinhos do site (mas continuam aqui, na sua lista).</p>
+      <div class="admin-table" id="listaEventos"></div>
+    </section>
+
+    <!-- SABORES -->
+    <section class="view" id="view-sabores">
+      <div class="section-toolbar">
+        <h2>Meus sabores</h2>
+        <button class="btn btn-primary" id="btnAddSabor">+ Adicionar sabor</button>
+      </div>
+      <div class="admin-table" id="listaSabores"></div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="view" id="view-depoimentos">
+      <div class="section-toolbar">
+        <h2>Feedback dos clientes</h2>
+        <button class="btn btn-primary" id="btnAddDepoimento">+ Adicionar feedback</button>
+      </div>
+      <p>Cole a mensagem igual a cliente escreveu pra você. Só o texto aparece no site, sem print.</p>
+      <div class="admin-table" id="listaDepoimentos"></div>
+    </section>
+
+    <!-- PUBLICAÇÕES -->
+    <section class="view" id="view-publicacoes">
+      <div class="section-toolbar">
+        <h2>Minhas publicações</h2>
+        <button class="btn btn-primary" id="btnAddPublicacao">+ Nova publicação</button>
+      </div>
+      <div class="admin-table" id="listaPublicacoes"></div>
+    </section>
+
+    <!-- PERFIL -->
+    <section class="view" id="view-perfil">
+      <h2>Meu perfil</h2>
+      <form id="formPerfil" class="form-grid" style="max-width:640px;">
+        <div class="image-upload" id="uploadFotoPerfil">
+          <img id="previewFotoPerfil" src="" alt="" style="display:none;" />
+          <div id="placeholderFotoPerfil" style="display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2l1-2h7l1 2h2A1.5 1.5 0 0 1 20 8.5v9A1.5 1.5 0 0 1 18.5 19h-13A1.5 1.5 0 0 1 4 17.5v-9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.2" stroke="currentColor" stroke-width="1.6"/></svg> Trocar minha foto principal</div>
+          <input type="file" accept="image/*" data-field="fotoPerfil" />
+        </div>
+        <div class="field"><label>Nome de exibição</label><input type="text" id="perfilNome" /></div>
+        <div class="field"><label>Nome da marca</label><input type="text" id="perfilMarca" /></div>
+        <div class="field"><label>Frase de efeito</label><input type="text" id="perfilFrase" /></div>
+        <div class="field"><label>Descrição / sobre mim</label><textarea id="perfilDescricaoInput"></textarea></div>
+        <div class="form-row-2">
+          <div class="field"><label>Cidade</label><input type="text" id="perfilCidade" /></div>
+          <div class="field"><label>WhatsApp (com DDI e DDD)</label><input type="text" id="perfilWhats" placeholder="5571999999999" /></div>
+        </div>
+        <div class="field"><label>Link do Instagram</label><input type="url" id="perfilInstagram" /></div>
+        <button class="btn btn-primary btn-block" type="submit">Salvar informações</button>
+      </form>
+
+      <h2 style="margin-top:40px;">Mensagens automáticas do WhatsApp</h2>
+      <form id="formWhatsapp" class="form-grid" style="max-width:640px;">
+        <div class="field"><label>Mensagem de encomenda geral</label><textarea id="tplEncomenda"></textarea></div>
+        <div class="field"><label>Mensagem ao pedir um sabor (use {nome})</label><textarea id="tplProduto"></textarea></div>
+        <div class="field"><label>Mensagem sobre um evento (use {evento})</label><textarea id="tplEvento"></textarea></div>
+        <button class="btn btn-primary btn-block" type="submit">Salvar mensagens</button>
+      </form>
+
+      <h2 style="margin-top:40px;">Acesso ao painel</h2>
+      <form id="formAcesso" class="form-grid" style="max-width:640px;">
+        <div class="form-row-2">
+          <div class="field"><label>Usuário</label><input type="text" id="acessoUsuario" /></div>
+          <div class="field"><label>Nova senha</label><input type="password" id="acessoSenha" placeholder="Deixe em branco para manter" /></div>
+        </div>
+        <button class="btn btn-secondary btn-block" type="submit">Atualizar acesso</button>
+      </form>
+    </section>
+  </div>
+</div>
+
+<!-- MODAL GENÉRICO -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">Adicionar</h3>
+      <button class="modal-close" id="modalClose" aria-label="Fechar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+    <form id="modalForm" class="form-grid"></form>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="../assets/js/data.js"></script>
+<script src="assets/admin.js"></script>
+</body>
+</html>
