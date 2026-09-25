@@ -63,7 +63,8 @@ Bibliotecas auxiliares em `lib/`: `auth.js` e `session.js` (senha com hash scryp
 ## Como alterar o essencial
 
 - **Número de WhatsApp e mensagens automáticas:** painel → **Meu Perfil**.
-- **Fotos e vídeo de capa:** a foto de perfil é trocada em **Meu Perfil**. Para trocar o vídeo/foto de fundo do topo do site, substitua os arquivos em `public/media/hero.mp4` e `public/media/hero-poster.jpg` (mesmo nome).
+- **Foto de perfil:** trocada em **Meu Perfil**.
+- **Carrossel de vídeos do topo:** a lista (ordem e legendas) fica em `lib/reels.js`. Os vídeos originais (verticais, 9:16) ficam em `assets-src/reels/`; para trocar ou adicionar um, coloque o `.mp4` lá, inclua-o em `lib/reels.js` e rode `FFMPEG_PATH=/caminho/do/ffmpeg node scripts/encode-reels.mjs` — o script gera, em `public/media/reels/`, a versão de celular (720x1280), a de computador (1080x1920) e a capa. O site escolhe a versão certa sozinho e passa pro próximo vídeo quando um termina. Quanto maior a resolução do original (o ideal é 1080x1920, direto do celular), mais nítido fica.
 - **Senha do painel:** **Meu Perfil → Acesso ao painel**.
 - Tudo o mais (agenda, sabores, depoimentos, publicações) é gerenciado inteiramente pelo painel — nenhum conteúdo é fixo no código.
 
@@ -71,7 +72,7 @@ Bibliotecas auxiliares em `lib/`: `auth.js` e `session.js` (senha com hash scryp
 
 - Banco de dados: `prisma/dev.db` (arquivo único SQLite, criado automaticamente — não versionado no git). Faça backup desse arquivo periodicamente em produção.
 - Imagens enviadas pelo painel: `public/uploads/` (não versionado no git).
-- Fotos e vídeos originais do projeto (reais, da Larissa): `public/media/`.
+- Fotos reais da Larissa: `public/media/`. Vídeos do carrossel: originais em `assets-src/reels/`, versões otimizadas em `public/media/reels/`.
 
 ## Implantação (deploy)
 
@@ -91,7 +92,7 @@ Antes de colocar em produção:
 ```
 app/
   page.js                      → homepage (site público)
-  layout.js                    → layout raiz, fontes e metadata
+  layout.js                    → layout raiz, fontes (locais, em app/fonts) e metadata
   sitemap.js, robots.js        → SEO
   admin/
     login/page.js
@@ -108,10 +109,14 @@ lib/
   auth.js, session.js          → autenticação e sessão do painel
   upload.js, validate.js       → upload/validação de imagens e formulários
   whatsapp.js, format.js       → helpers de WhatsApp e formatação
+lib/reels.js                   → playlist do carrossel de vídeos
+assets-src/reels/              → vídeos originais (fonte para o encode)
+scripts/encode-reels.mjs       → gera as versões de celular/PC dos vídeos
 prisma/
   schema.prisma                → schema do banco
   seed.mjs                     → popula o banco na primeira execução
 public/
-  media/                       → fotos e vídeo reais da Larissa
+  media/                       → fotos reais da Larissa
+    reels/                     → vídeos do carrossel (versões celular/PC + capas)
   uploads/                     → imagens enviadas pelo painel
 ```

@@ -7,14 +7,15 @@ import { buildWhatsappLink, fillTemplate } from "@/lib/whatsapp";
 
 import Header from "@/components/site/Header";
 import Hero from "@/components/site/Hero";
+import Marquee from "@/components/site/Marquee";
 import Sobre from "@/components/site/Sobre";
 import ProximoEvento from "@/components/site/ProximoEvento";
 import Agenda from "@/components/site/Agenda";
 import Novidades from "@/components/site/Novidades";
 import Sabores from "@/components/site/Sabores";
 import Depoimentos from "@/components/site/Depoimentos";
-import Vitrine from "@/components/site/Vitrine";
 import Encomendas from "@/components/site/Encomendas";
+import Vitrine from "@/components/site/Vitrine";
 import Footer from "@/components/site/Footer";
 import WhatsappFloat from "@/components/site/WhatsappFloat";
 
@@ -45,16 +46,17 @@ export default async function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <a href="#conteudo" className="sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-0 focus:z-[1000] focus:rounded-br-lg focus:bg-cocoa focus:px-5 focus:py-3 focus:text-white">
+      <a href="#conteudo" className="sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-0 focus:z-[1000] focus:rounded-br-lg focus:bg-berry-900 focus:px-5 focus:py-3 focus:text-white">
         Pular para o conteúdo
       </a>
 
-      <Header whatsappLink={whatsappLink} />
+      <Header whatsappLink={whatsappLink} instagramLink={perfil.instagram} marca={perfil.marca} />
 
       <main id="conteudo">
-        <Hero perfil={perfil} whatsappLink={whatsappLink} />
+        <Hero perfil={perfil} whatsappLink={whatsappLink} sabores={sabores} />
+        <Marquee cidade={perfil.cidade} />
         <Sobre perfil={perfil} whatsappLink={whatsappLink} />
-        <ProximoEvento eventos={eventos} />
+        <ProximoEvento eventos={eventos} perfil={perfil} />
         <Agenda eventos={eventos} />
         <Novidades publicacoes={publicacoes} />
         <Sabores sabores={sabores} perfil={perfil} />
