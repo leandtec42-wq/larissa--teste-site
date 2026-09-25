@@ -1,26 +1,141 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream: #faf3ec;
+  --cream-deep: #f3e4d8;
+  --rose: #e8a6b8;
+  --rose-soft: #f3cdd9;
+  --rose-deep: #c6748c;
+  --rose-dark: #8b4a5d;
+  --cocoa: #3b2c2c;
+  --cocoa-soft: #6b5750;
+  --gold: #c99b5d;
+  --whatsapp: #25d366;
+  --whatsapp-dark: #1ebe5b;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --shadow-sm: 0 4px 16px rgba(59, 44, 44, 0.08);
+  --shadow-md: 0 12px 32px rgba(59, 44, 44, 0.12);
+  --shadow-lg: 0 24px 60px rgba(59, 44, 44, 0.18);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-rose: var(--rose);
+  --color-rose-soft: var(--rose-soft);
+  --color-rose-deep: var(--rose-deep);
+  --color-rose-dark: var(--rose-dark);
+  --color-cocoa: var(--cocoa);
+  --color-cocoa-soft: var(--cocoa-soft);
+  --color-gold: var(--gold);
+  --color-whatsapp: var(--whatsapp);
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--cocoa);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+}
+
+/* Reveal-on-scroll ------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fadeUp 1s var(--ease) both;
+}
+
+@keyframes pulseWa {
+  0%,
+  100% {
+    box-shadow: 0 14px 34px rgba(37, 211, 102, 0.45);
+  }
+  50% {
+    box-shadow: 0 14px 34px rgba(37, 211, 102, 0.7), 0 0 0 10px rgba(37, 211, 102, 0.12);
+  }
+}
+.animate-pulse-wa {
+  animation: pulseWa 2.6s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0% {
+    top: -100%;
+  }
+  60% {
+    top: 100%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+.animate-scroll-line::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  animation: scrollLine 1.8s ease-in-out infinite;
+}
+
+:focus-visible {
+  outline: 3px solid var(--rose-dark);
+  outline-offset: 2px;
 }

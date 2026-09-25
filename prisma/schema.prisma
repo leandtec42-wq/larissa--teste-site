@@ -1,0 +1,84 @@
+// Model layer (MVC) — Prisma schema.
+// SQLite: a single file database, no external service needed to run this
+// project. lib/models/*.js is the only code that talks to this schema.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id           Int    @id @default(autoincrement())
+  usuario      String @unique
+  senhaHash    String
+  tentativas   Int    @default(0)
+  bloqueadoAte DateTime?
+}
+
+model Perfil {
+  id                 Int    @id @default(1)
+  nome               String
+  marca              String
+  frase              String
+  cidade             String
+  whatsapp           String
+  instagram          String
+  descricao          String
+  fotoPerfil         String
+  fotoSecundaria     String?
+  fotoCapa           String
+  videoCapa          String
+  videoCapaPoster    String?
+  videoVitrine       String?
+  tplEncomenda       String
+  tplProduto         String
+  tplEvento          String
+}
+
+model Evento {
+  id        String   @id @default(cuid())
+  nome      String
+  data      DateTime
+  horario   String
+  local     String
+  cidade    String
+  endereco  String?
+  mapsLink  String?
+  descricao String?
+  imagem    String?
+  ativo     Boolean  @default(true)
+  criadoEm  DateTime @default(now())
+}
+
+model Sabor {
+  id          String  @id @default(cuid())
+  nome        String
+  descricao   String?
+  preco       Float
+  foto        String
+  disponivel  Boolean @default(true)
+  ordem       Int     @default(0)
+}
+
+model Depoimento {
+  id        String  @id @default(cuid())
+  autor     String?
+  descricao String
+  foto      String?
+  ordem     Int     @default(0)
+  ativo     Boolean @default(true)
+}
+
+model Publicacao {
+  id        String   @id @default(cuid())
+  foto      String?
+  titulo    String
+  descricao String?
+  data      DateTime
+  categoria String?
+  status    String   @default("rascunho") // "rascunho" | "publicado"
+}
