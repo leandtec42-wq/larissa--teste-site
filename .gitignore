@@ -30,9 +30,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-!.env.example
+# env files: .env só tem a URL do SQLite local (não é segredo) e fica
+# versionado de propósito, pra `npm install` funcionar sozinho em qualquer
+# clone. .env.local é onde ficam segredos reais (SESSION_SECRET) e nunca
+# é versionado.
+.env.local
+.env.*.local
 
 # vercel
 .vercel
